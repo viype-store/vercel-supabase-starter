@@ -1,53 +1,72 @@
-# Vercel + Supabase Starter
+# VYPE Store Starter
 
-قالب جاهز ترفعه إلى GitHub ثم تربطه مع Vercel و Supabase.
+متجر واجهة جاهز مبني بـ `Next.js + Vercel + Supabase` لطلبات:
+
+- `VALORANT Points`
+- `VALORANT gifting`
+
+## ماذا يفعل هذا المشروع؟
+
+- يعرض كتالوج عروض جاهز
+- يحتوي على نموذج طلب فعلي
+- يحفظ الطلبات في جدول `order_requests` داخل Supabase
+- مناسب كبداية سريعة قبل إضافة الدفع أو لوحة إدارة
 
 ## ماذا ترفع إلى GitHub؟
 
-ارفع **كل محتويات هذا المجلد** كما هي، ما عدا الملفات الموجودة أصلًا في `.gitignore`.
+ارفع **كل محتويات هذا المجلد** كما هي، باستثناء الملفات المستثناة في `.gitignore`.
 
-## التشغيل المحلي
+## تشغيل محلي
 
 ```bash
 npm install
 npm run dev
 ```
 
-## الربط مع Vercel
+## النشر على Vercel
 
-1. ارفع هذا المجلد إلى مستودع جديد في GitHub.
-2. ادخل إلى Vercel ثم اختر `New Project`.
-3. اختر المستودع الذي رفعت إليه هذا القالب.
-4. أضف متغيرات البيئة التالية في إعدادات المشروع:
+1. ارفع المشروع إلى GitHub.
+2. ادخل إلى Vercel.
+3. اختر `New Project`.
+4. اختر المستودع.
+5. أضف:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-5. اضغط `Deploy`.
+6. اضغط `Deploy`.
 
-## الربط مع Supabase
+## إعداد Supabase
 
 1. أنشئ مشروعًا جديدًا في Supabase.
 2. افتح `SQL Editor`.
-3. نفذ الملف التالي:
+3. نفذ هذا الملف:
 
 ```text
 supabase/setup.sql
 ```
 
-4. من إعدادات المشروع خذ:
+4. خذ من إعدادات المشروع:
    - `Project URL`
    - `anon key`
-5. ضع القيمتين في Vercel أو في `.env.local` محليًا.
+5. أضف القيم إلى Vercel أو إلى `.env.local`.
 
-## أين تعدل المحتوى؟
+## الجدول الذي ينشئه SQL
 
-- النصوص الرئيسية: `app/page.js`
-- الألوان والتصميم: `app/globals.css`
-- نموذج Supabase: `components/waitlist-form.js`
+- `order_requests`
 
-## فكرة القالب
+## أهم الملفات
 
-هذا القالب عبارة عن صفحة هبوط حديثة فيها:
+- الصفحة الرئيسية: `app/page.js`
+- التنسيق: `app/globals.css`
+- نموذج الطلب: `components/order-form.js`
+- خيارات المنتجات: `lib/catalog.js`
+- قاعدة البيانات: `supabase/setup.sql`
 
-- واجهة جاهزة للنشر على Vercel
-- نموذج بسيط يحفظ البريد والاسم والفكرة في Supabase
-- تصميم قابل للتعديل بسرعة
+## الخطوة التالية بعد النشر
+
+إذا أردت النسخة الأقوى لاحقًا يمكننا إضافة:
+
+- صفحة منتجات منفصلة
+- لوحة Admin
+- حالة الطلب `pending / paid / delivered`
+- رفع إثباتات الدفع
+- Stripe أو أي بوابة دفع أخرى

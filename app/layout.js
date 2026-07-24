@@ -1,24 +1,13 @@
-import { Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const sans = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const serif = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-serif",
-});
-
 export const metadata = {
-  title: "YourBrand Starter",
-  description: "A ready-to-deploy Vercel and Supabase starter.",
+  title: "VYPE Store | VALORANT Points & Gifting",
+  description: "A Vercel and Supabase storefront for VALORANT point packs and gifting requests.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );

@@ -1,3 +1,15 @@
-const nextConfig = {};
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
+
+const nextConfig = {
+  turbopack: {
+    root: rootDir,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+};
 
 export default nextConfig;

@@ -1,72 +1,82 @@
-# VYPE Store Starter
+# VYPE Market Prototype
 
-متجر واجهة جاهز مبني بـ `Next.js + Vercel + Supabase` لطلبات:
+واجهة متجر `Next.js + Supabase` بطابع قريب من مواقع gaming marketplaces مثل:
 
-- `VALORANT Points`
-- `VALORANT gifting`
+- كثافة بصرية قوية
+- تبويبات خدمات واضحة
+- سلة و Checkout
+- رفع وصل الدفع
+- Tickets و Direct Chat
 
-## ماذا يفعل هذا المشروع؟
+## ما الذي يوجد في هذه النسخة؟
 
-- يعرض كتالوج عروض جاهز
-- يحتوي على نموذج طلب فعلي
-- يحفظ الطلبات في جدول `order_requests` داخل Supabase
-- مناسب كبداية سريعة قبل إضافة الدفع أو لوحة إدارة
+- تسجيل دخول / إنشاء حساب عبر `Supabase Auth`
+- 3 تبويبات رئيسية:
+  - `شحن كلاعب طبيعي`
+  - `شحن كـ Reseller`
+  - `قيفت للبندل`
+- إضافة المنتجات إلى السلة
+- اختيار وسيلة الدفع:
+  - `BaridiMob`
+  - `CCP`
+  - `Flexy`
+- إضافة `+35%` فوق السعر الأساسي داخل checkout
+- رفع وصل الدفع إلى `Supabase Storage`
+- إنشاء الطلب داخل قاعدة البيانات
+- إنشاء `ticket` أو `direct chat`
+- عرض المحادثات والردود من داخل الموقع
 
-## ماذا ترفع إلى GitHub؟
+## ملفات المشروع الأهم
 
-ارفع **كل محتويات هذا المجلد** كما هي، باستثناء الملفات المستثناة في `.gitignore`.
+- الصفحة الرئيسية: `app/page.js`
+- الواجهة الكاملة: `components/storefront-app.js`
+- بيانات المتجر والعروض: `lib/marketplace-data.js`
+- عميل Supabase: `lib/supabase/client.js`
+- قاعدة البيانات والتخزين: `supabase/setup.sql`
+- التصميم: `app/globals.css`
 
-## تشغيل محلي
+## كيف تشغله محليًا؟
 
 ```bash
 npm install
 npm run dev
 ```
 
-## النشر على Vercel
+## متغيرات البيئة المطلوبة
 
-1. ارفع المشروع إلى GitHub.
-2. ادخل إلى Vercel.
-3. اختر `New Project`.
-4. اختر المستودع.
-5. أضف:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-6. اضغط `Deploy`.
+أنشئ ملف `.env.local` أو أضفها في Vercel:
 
-## إعداد Supabase
+```bash
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+```
 
-1. أنشئ مشروعًا جديدًا في Supabase.
-2. افتح `SQL Editor`.
-3. نفذ هذا الملف:
+## ماذا تنفذ في Supabase؟
+
+افتح `SQL Editor` ثم نفذ:
 
 ```text
 supabase/setup.sql
 ```
 
-4. خذ من إعدادات المشروع:
-   - `Project URL`
-   - `anon key`
-5. أضف القيم إلى Vercel أو إلى `.env.local`.
+هذا الملف ينشئ:
 
-## الجدول الذي ينشئه SQL
+- `customer_profiles`
+- `orders`
+- `support_threads`
+- `support_messages`
+- bucket باسم `payment-receipts`
 
-- `order_requests`
+## ملاحظات مهمة
 
-## أهم الملفات
+- إذا لم تكن متغيرات Supabase موجودة، الواجهة تعمل في `preview mode`
+- الـ preview mode يسمح لك بمعاينة الشكل والتفاعل قبل تفعيل الـ backend
+- عند تفعيل Supabase، الطلبات والتذاكر والرسائل تحفظ فعليًا
 
-- الصفحة الرئيسية: `app/page.js`
-- التنسيق: `app/globals.css`
-- نموذج الطلب: `components/order-form.js`
-- خيارات المنتجات: `lib/catalog.js`
-- قاعدة البيانات: `supabase/setup.sql`
+## الخطوات القادمة المنطقية
 
-## الخطوة التالية بعد النشر
-
-إذا أردت النسخة الأقوى لاحقًا يمكننا إضافة:
-
-- صفحة منتجات منفصلة
-- لوحة Admin
-- حالة الطلب `pending / paid / delivered`
-- رفع إثباتات الدفع
-- Stripe أو أي بوابة دفع أخرى
+- لوحة Admin حقيقية للرد على الرسائل والطلبات
+- حالة الطلب: `paid / in-progress / delivered / cancelled`
+- إشعارات لحظية للرسائل
+- صفحات منفصلة للمنتجات
+- طرق دفع أكثر أو ربط بوابة تلقائية
